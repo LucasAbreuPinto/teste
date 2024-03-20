@@ -1,3 +1,4 @@
+import os
 import tempfile
 from autogen import ConversableAgent
 from autogen.coding import LocalCommandLineCodeExecutor
@@ -36,3 +37,6 @@ This is the end of the message.
 # Generate a reply for the given code.
 reply = code_executor_agent.generate_reply(messages=[{"role": "user", "content": message_with_code_block}])
 print(reply)
+
+# Corrigido para usar temp_dir.name para obter o caminho do diretório como uma string
+print(os.listdir(temp_dir.name))

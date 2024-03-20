@@ -1,0 +1,40 @@
+import os
+import pprint
+from autogen import ConversableAgent
+
+# Definindo a chave de API diretamente no código (não recomendado para uso real)
+api_key = "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"
+
+# Configurando o prompt de resumo padrão conforme solicitado
+ConversableAgent.DEFAULT_summary_prompt = "Summarize the takeaway from the conversation. Do not add any introductory phrases."
+
+student_agent = ConversableAgent(
+    name="Student_Agent",
+    system_message="You are a student willing to learn.",
+    llm_config={"config_list": [{"model": "gpt-4", "api_key": api_key}]},
+)
+teacher_agent = ConversableAgent(
+    name="Teacher_Agent",
+    system_message="You are a math teacher.",
+    llm_config={"config_list": [{"model": "gpt-4", "api_key": api_key}]},
+)
+
+# Iniciando a conversa entre o agente estudante e o agente professor
+chat_result = student_agent.initiate_chat(
+    teacher_agent,
+    message="What is triangle inequality?",
+    summary_method="reflection_with_llm",
+    max_turns=2,
+)
+
+# Imprimindo o prompt de resumo padrão para verificar se a mudança foi aplicada
+print(ConversableAgent.DEFAULT_summary_prompt)
+
+# Após a conversa, imprimindo o resumo gerado
+print(chat_result.summary)
+
+# Get the chat history.
+pprint.pprint(chat_result.chat_history)
+
+# Get the cost of the chat.
+pprint.pprint(chat_result.cost)

@@ -2,7 +2,7 @@ import os
 from autogen import ConversableAgent
 
 # Definindo a chave de API diretamente no código (não recomendado para uso real)
-api_key = "API KEY"
+api_key = "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"
 
 agent_with_number = ConversableAgent(
     "agent_with_number",
